@@ -1,22 +1,22 @@
 {
   "log": {
-    "disabled": false,
+    "disabled": true,
     "level": "warn",
     "timestamp": true
   },
   "dns": {
     "servers": [
       {
-        "tag": "Internet-dns",
+        "tag": "Risma-dns",
         "address": "1.0.0.1",
         "strategy": "ipv4_only",
-        "detour": "Internet"
+        "detour": "Risma"
       },
       {
-        "tag": "Best Latency-dns",
+        "tag": "Cantik-dns",
         "address": "1.1.1.1",
         "strategy": "ipv4_only",
-        "detour": "Best Latency"
+        "detour": "Cantik"
       },
       {
         "tag": "direct-dns",
@@ -56,13 +56,13 @@
         "rewrite_ttl": 20
       },
       {
-        "outbound": "Internet",
-        "server": "Internet-dns",
+        "outbound": "Risma",
+        "server": "Risma-dns",
         "rewrite_ttl": 20
       },
       {
-        "outbound": "Best Latency",
-        "server": "Best Latency-dns",
+        "outbound": "Cantik",
+        "server": "Cantik-dns",
         "rewrite_ttl": 20
       },
       {
@@ -104,20 +104,21 @@
   ],
   "outbounds": [
     {
-      "type": "selector",
-      "tag": "Internet",
+      "type": "urltest",
+      "tag": "Risma",
       "outbounds": [
-        "Best Latency",
         "Jala-17-jul",
         "Wijaya-19-jun",
         "Herza-12-jun",
         "Nusa-31-mei",
         "Biznet-07-jun"
-      ]
+      ],
+      "url": "https://detectportal.firefox.com/success.txt",
+      "interval": "1m0s"
     },
     {
       "type": "urltest",
-      "tag": "Best Latency",
+      "tag": "Cantik",
       "outbounds": [
         "Jala-17-jul",
         "Wijaya-19-jun",
@@ -288,7 +289,7 @@
   "route": {
     "auto_detect_interface": true,
     "override_android_vpn": true,
-    "final": "Internet",
+    "final": "Risma",
     "rules": [
       {
         "outbound": "dns-out",
